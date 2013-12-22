@@ -17,6 +17,7 @@ from django.db.models import F
 from django import template
 from tagging.models import Tag, TaggedItem
 from django.core.mail import send_mail
+import datetime
 
 def index(request):
 	if request.user.is_active == 1:
@@ -185,3 +186,12 @@ def dispatch(request):
 		dict(temp.items()),context_instance=RequestContext(request))
 	else:
 		return render_to_response('builty/index1.html')
+
+def confirm_dispatch(request):
+	if request.user.is_active == 1:
+		query = request.GET.get('q', '')
+		date = datetime.date.today()
+		status = 1
+		dispatch_status.objects.filter(id = query).update(status = status,
+		date = date)
+		dispatch_status.obejcts

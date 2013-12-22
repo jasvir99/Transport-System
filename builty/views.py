@@ -189,4 +189,10 @@ def dispatch(request):
 
 def confirm_dispatch(request):
 	if request.user.is_active == 1:
-		
+		query = request.GET.get('q', '')
+		date = datetime.date.today()
+		status = 1
+		dispatch_status.objects.filter(id = query).update(status = status,
+		date = date)
+		return render_to_response('builty/dispatch_ok.html')
+		dispatch_status.obejcts
