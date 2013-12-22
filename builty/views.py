@@ -46,12 +46,13 @@ def new_consignment(request):
 				actual_weight_in_kg = cd['actual_weight_in_kg']
 				charged_weight_in_kg = cd['charged_weight_in_kg']
 				mode = cd['mode_of_transfer']
+				account = cd['account_of']
 				dispatch = dispatch_status()
 				dispatch.save()
 				id = dispatch_status.objects.aggregate(Max('id'))
 				status_id = id['id__max']
 				status = dispatch_status.objects.get(id = status_id)
-				save = consignment_details(mode_of_transfer = mode, 
+				save = consignment_details(account_of = account, mode_of_transfer = mode, 
 				consigner = consigner ,consigner_tin = consigner_tin, 
 				consignee =  consignee, consignee_tin = consignee_tin, 
 				source = source, destination = destination, number_of_pkgs 

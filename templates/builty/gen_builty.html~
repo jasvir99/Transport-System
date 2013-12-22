@@ -90,7 +90,7 @@
 				<td align="center"><b>Mode Of Payment</b></td>
 			</tr>
 			<tr>
-				<td align="center"><br>{{mode.mode}}<br></td>
+				<td align="center"><br><br></td>
 				
 			</tr> 
 			</table>
@@ -113,6 +113,7 @@
 			</table>
 		</td>
 		</table>
-
+<br><br><br>
+<h4 align="right"> Signature Of Issuing Clerk &nbsp;&nbsp;</h4>
 </html>
 {% endblock %}
