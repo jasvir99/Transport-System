@@ -40,11 +40,20 @@ class dispatch_status(models.Model):
 	status = models.IntegerField(default = "0")
 	date = models.DateField(null = True, blank = True)
 
+class account(models.Model):
+	'''
+		** Model to add various transport componies **
+	'''
+	account = models.CharField(max_length = 100)
+	
+	def __unicode__(self):
+		return self.account
 
 class consignment_details(models.Model):
     '''
         ** Model for details of consignment **
     '''
+    account_of = models.ForeignKey(account)
     consigner = models.CharField(max_length = 100)
     consigner_tin = models.CharField(max_length = 20)
     consignee = models.CharField(max_length = 100)

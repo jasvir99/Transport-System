@@ -32,6 +32,15 @@ class transfer_modeAdmin(admin.ModelAdmin):
 	search_fields = ('mode',)
 	list_filter = ['mode']
 
+class accountAdmin(admin.ModelAdmin):
+	'''
+		** Admin options to add mode of transfer. **
+	'''
+	list_display = ('account',)
+	search_fields = ('account',)
+	list_filter = ['account']
+
+admin.site.register(account, accountAdmin)
 admin.site.register(transfer_mode, transfer_modeAdmin)
 admin.site.register(fixed_values, fixed_valuesAdmin)
 admin.site.register(freight, freight_modeAdmin)

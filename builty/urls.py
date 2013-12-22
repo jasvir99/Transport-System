@@ -11,4 +11,5 @@ urlpatterns = patterns('BuiltyMaker.builty.views',
         (r'^cons_register', 'consignment_register'),
 		(r'^prev_cons', 'prev_cons'),
 		(r'^dispatch', 'dispatch'),
+		(r'^confirm_dispatch','confirm_dispatch'),
 )

@@ -16,7 +16,7 @@
 		<th>Source</th>
 		<th>Destination</th>
 		<th>Date</th>
-		<th>Status</th>
+		<th width = 150>Status</th>
 	</tr>
 
 <tbody>
@@ -32,9 +32,9 @@
 				<td align="center">{{values.cons__destination}}</td>
 				<td align="center">{{values.cons__date}}</td>
 				{% if values.cons__status__status == 0 %}
-					<td align="center"><a href="/builty/main/dispatch/?q={{ values.cons__id }}">Waiting</a></td>
+					<td align="center"><a href="/builty/main/dispatch/?q={{ values.cons__id }}"><b>Waiting</b></a></td>
 				{% else %}
-					<td align="center">Dispatched</td>
+					<td align="center">Dispatched on {{ values.cons__status__date }}</td>
 				{% endif %}
 			</tr>
 		{% else %}
@@ -48,9 +48,9 @@
 				<td align="center">{{values.cons__destination}}</td>
 				<td align="center">{{values.cons__date}}</td>
 				{% if values.cons__status__status == 0 %}
-					<td align="center"><a href="/builty/main/dispatch/?q={{ values.cons__id }}">Waiting</a></td>
+					<td align="center"><a href="/builty/main/dispatch/?q={{ values.cons__id }}"><b>Waiting</b></a></td>
 				{% else %}
-					<td align="center">Dispatched</td>
+					<td align="center">Dispatched on {{ values.cons__status__date }}</td>
 				{% endif %}
 			</tr>
 		{% endif %}

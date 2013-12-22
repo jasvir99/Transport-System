@@ -154,7 +154,8 @@ def consignment_register(request):
 		pay = freight_details.objects.values('pay_id').all()
 		details = freight_details.objects.values('cons__id','cons__consigner',
 		'cons__consigner_tin','cons__consignee','cons__consignee_tin',
-		'cons__date','cons__source','cons__destination','cons','cons__status__status').all()
+		'cons__date','cons__source','cons__destination','cons','cons__status__status',
+		'cons__status__date').all()
 		temp = {'consignment': details}
 		return render_to_response('builty/cons_register.html', 
 		dict(temp.items()),context_instance=RequestContext(request))
@@ -195,4 +196,5 @@ def confirm_dispatch(request):
 		dispatch_status.objects.filter(id = query).update(status = status,
 		date = date)
 		return render_to_response('builty/dispatch_ok.html')
-		dispatch_status.obejcts
+	else:
+		return render_to_response('builty/index1.html')
