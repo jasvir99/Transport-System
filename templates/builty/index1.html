@@ -1,0 +1,17 @@
+{% extends "base_site1.html" %}
+{% load i18n admin_static %}
+
+{% block extrastyle %}{{ block.super }}<link rel="stylesheet" type="text/css" href="{% static "admin/css/dashboard.css" %}" />{% endblock %}
+
+{% block coltype %}colMS{% endblock %}
+
+{% block bodyclass %}dashboard{% endblock %}
+
+{% block breadcrumbs %}{% endblock %}
+
+{% block content %}
+<h1>Welcome</h1>
+<a href="/builty/accounts/login">Login</a><br><br>
+<a href="/builty/accounts/register">Register</a>  
+
+{% endblock %}

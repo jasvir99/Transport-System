@@ -1,0 +1,61 @@
+{% extends "base_site_consNote.html" %}
+{% load i18n %}
+{% block title %}{{ title }} {% trans 'Consignment Register' %}{% endblock %}
+<html>
+{% block content %}
+<h1 align="center">Consignment Regsiter</h1>
+<br><br>
+<table border="1" width ="100%" class="striped">
+
+	<tr>
+		<th>G.R No.</th>
+		<th>Consigner</th>
+		<th>Consigner TIN</th>
+		<th>Consignee</th>
+		<th>Consignee TIN</th>
+		<th>Source</th>
+		<th>Destination</th>
+		<th>Date</th>
+		<th>Status</th>
+	</tr>
+
+<tbody>
+	{% for values in consignment %}	
+		{% if forloop.counter|divisibleby:"2" %}
+			<tr class="even">
+				<td align="center">{{values.cons__id}}</td>
+				<td align="center">{{values.cons__consigner}}</td>
+				<td align="center">{{values.cons__consigner_tin}}</td>
+				<td align="center">{{values.cons__consignee}}</td>
+				<td align="center">{{values.cons__consignee_tin}}</td>
+				<td align="center">{{values.cons__source}}</td>
+				<td align="center">{{values.cons__destination}}</td>
+				<td align="center">{{values.cons__date}}</td>
+				{% if values.cons__status__status == 0 %}
+					<td align="center"><a href="/builty/main/dispatch/?q={{ values.cons__id }}">Waiting</a></td>
+				{% else %}
+					<td align="center">Dispatched</td>
+				{% endif %}
+			</tr>
+		{% else %}
+			<tr>
+				<td align="center">{{values.cons__id}}</td>
+				<td align="center">{{values.cons__consigner}}</td>
+				<td align="center">{{values.cons__consigner_tin}}</td>
+				<td align="center">{{values.cons__consignee}}</td>
+				<td align="center">{{values.cons__consignee_tin}}</td>
+				<td align="center">{{values.cons__source}}</td>
+				<td align="center">{{values.cons__destination}}</td>
+				<td align="center">{{values.cons__date}}</td>
+				{% if values.cons__status__status == 0 %}
+					<td align="center"><a href="/builty/main/dispatch/?q={{ values.cons__id }}">Waiting</a></td>
+				{% else %}
+					<td align="center">Dispatched</td>
+				{% endif %}
+			</tr>
+		{% endif %}
+	{% endfor %}
+</tbody>
+</table>
+{% endblock %}
+</html>

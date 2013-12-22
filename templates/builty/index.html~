@@ -1,0 +1,29 @@
+{% extends "base_site.html" %}
+{% load i18n %}
+<html>
+{% block content %}
+<h1>Home</h1>
+<div id="content-main">
+
+
+    
+        <div class="module">
+        <table>
+        <caption>
+            <aclass="section" title="Options">
+                {% blocktrans  %}Options{% endblocktrans %}</a>
+		</caption>
+			<tr>
+			<th><b><a href="/builty/main/newconsignmet">New Consignment</a> <br><br>
+				<a href="/builty/main/cons_register">Consignments Register</a><br><br>
+				<a href="/builty/main/prev_cons/">Consignments Register</b></th>
+            </tr>
+        </table>
+        </div>
+
+
+</div>
+<html>
+{% endblock %}
+
+

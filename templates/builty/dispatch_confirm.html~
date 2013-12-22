@@ -1,0 +1,32 @@
+{% extends "base_site.html" %}
+{% load i18n %}
+<head>
+	<title>Confirm Dispatch</title>
+</head>
+{% block content %}
+	{% for val in consignment %}
+		<table width= "20%" class="striped">
+		<tr>
+			<th>Confirm Dispatch</th>
+		</tr>
+			</tbody>
+				<tr class="even">
+					<td><b>Consigner </b>:&nbsp;{{ val.consigner }}</td>
+				</tr>
+				<tr>
+					<td><b>Consignee </b>:&nbsp;{{ val.consignee }}</td>
+				</tr>
+				<tr class="even">
+					<td><b>Source </b>:&nbsp; {{ val.source }}</td>
+				</tr>
+				<tr>
+					<td><b>Destination </b>&nbsp; {{ val.destination }}</td>
+				</tr>
+				<tr class="even">
+					<td><a href="/builty/main/confirm_dispatch/?q={{ val.id }}">Confirm Dispatch</a></td>
+				</tr>
+			</tbody>
+		</tr>
+		</table>
+	{% endfor %}
+{% endblock %}

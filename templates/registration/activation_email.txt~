@@ -1,0 +1,13 @@
+{% load i18n %}
+
+
+
+To complete your registration process, you need to confirm your Email by
+clicking following link,
+
+http://{{ site.domain }}{% url 'registration_activate' activation_key %}
+
+If you have not initiated this registration process, then just ignore this
+mail.
+
+{% blocktrans %}Link is valid for {{ expiration_days }} days.{% endblocktrans %}

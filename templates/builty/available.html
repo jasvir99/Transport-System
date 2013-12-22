@@ -1,0 +1,69 @@
+{% extends "base_site.html" %}
+{% load i18n %}
+<html lang="en">
+<head>
+    <title>Search</title>
+</head>
+{% block content %}
+
+<h2 class="changeBlue">Available Room and Shops</h2>          
+
+{% if rooms %}
+<div class="module">
+<table border='1' class="fixed">
+<caption>
+            <aclass="section" title="room">
+                {% blocktrans  %}Rooms{% endblocktrans %}</a>
+		</caption>
+<tr>
+		<th>Sr.No </th>
+		<th>Id.</th>
+                <th>Rent</th>
+                
+	</tr>
+
+  {% for rooms in rooms %}
+	<tr>
+	<td>{{forloop.counter}}</td>
+        <td> {{ rooms.Id }} </td>
+        <td> {{rooms.rent}}</td>
+        
+	</tr>
+      {% endfor %}
+      </ul>
+    {% else %}
+      <p>No Room Available</p>
+    {% endif %}
+</table>
+</div>
+{% if shop %}
+<div class="module">
+<table border='1' class="fixed">
+<caption>
+            <aclass="section" title="shops">
+                {% blocktrans  %}Shops{% endblocktrans %}</a>
+		</caption>
+<tr>
+		<th>Sr.No </th>
+		<th>Id</th>
+                <th>Rent</th>
+                
+	</tr>
+
+  {% for shop in shop %}
+	<tr>
+	<td>{{forloop.counter}}</td>
+        <td> {{ shop.Id }} </td>
+        <td> {{shop.rent}}</td>
+        
+	</tr>
+      {% endfor %}
+      </ul>
+    {% else %}
+      <p>No Shops Available</p>
+    {% endif %}
+
+</table>
+</div>
+</html>
+{% endblock %}

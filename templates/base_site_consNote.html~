@@ -1,0 +1,9 @@
+{% extends "base_consNote.html" %}
+{% load i18n %}
+
+{% block title %}{{ title }} {% trans 'Consignment Note' %}{% endblock %}
+
+{% block branding %}
+{% endblock %}
+
+{% block nav-global %}{% endblock %}

@@ -1,0 +1,101 @@
+{% load admin_static %}{% load url from future %}<!DOCTYPE html>
+<html lang="{{ LANGUAGE_CODE|default:"en-us" }}" {% if LANGUAGE_BIDI %}dir="rtl"{% endif %}>
+<head>
+<title>{% block title %}{% endblock %}</title>
+<link rel="stylesheet" type="text/css" href= "http://localhost/builtystatic/css/screen.css" />
+{% block extrastyle %}{% endblock %}
+<!--[if lte IE 7]><link rel="stylesheet" type="text/css" href="{% block stylesheet_ie %}{% static "admin/css/ie.css" %}{% endblock %}" /><![endif]-->
+{% if LANGUAGE_BIDI %}<link rel="stylesheet" type="text/css" href="{% block stylesheet_rtl %}{% static "admin/css/rtl.css" %}{% endblock %}" />{% endif %}
+<script type="text/javascript">window.__admin_media_prefix__ = "{% filter escapejs %}{% static "admin/" %}{% endfilter %}";</script>
+{% block extrahead %}{% endblock %}
+{% block blockbots %}<meta name="robots" content="NONE,NOARCHIVE" />{% endblock %}
+</head>
+<head>
+<link rel="stylesheet" href="http://localhost/builtystatic/jquery-ui-1.10.3.custom/development-bundle/themes/redmond/jquery.ui.all.css">
+	<script src="http://localhost/builtystatic/jquery-ui-1.10.3.custom/development-bundle/jquery-1.9.1.js"></script>
+	<script src="http://localhost/builtystatic/jquery-ui-1.10.3.custom/development-bundle/ui/jquery.ui.core.js"></script>
+	<script src="http://localhost/builtystatic/jquery-ui-1.10.3.custom/development-bundle/ui/jquery.ui.widget.js"></script>
+	<script src="http://localhost/builtystatic/jquery-ui-1.10.3.custom/development-bundle/ui/jquery.ui.effect.js"></script>
+	<script src="http://localhost/builtystatic/jquery-ui-1.10.3.custom/development-bundle/ui/jquery.ui.effect-blind.js"></script>
+	<script src="http://localhost/builtystatic/jquery-ui-1.10.3.custom/development-bundle/ui/jquery.ui.effect-bounce.js"></script>
+	<script src="http://localhost/builtystatic/jquery-ui-1.10.3.custom/development-bundle/ui/jquery.ui.effect-clip.js"></script>
+	<script src="http://localhost/builtystatic/jquery-ui-1.10.3.custom/development-bundle/ui/jquery.ui.effect-drop.js"></script>
+	<script src="http://localhost/builtystatic/jquery-ui-1.10.3.custom/development-bundle/ui/jquery.ui.effect-fold.js"></script>
+	<script src="http://localhost/builtystatic/jquery-ui-1.10.3.custom/development-bundle/ui/jquery.ui.effect-slide.js"></script>
+	<script src="http://localhost/builtystatic/jquery-ui-1.10.3.custom/development-bundle/ui/jquery.ui.datepicker.js"></script>
+	<link rel="stylesheet" href="../demos.css">
+
+<script>
+$(function() {
+$( "#id_date" ).datepicker({
+
+changeMonth: true,
+changeYear: true,dateFormat:'yy-mm-dd'
+});
+$( "#id_date" ).datepicker( "option", "showAnim", 'clip' );
+});
+  </script> 
+</head>
+{% load i18n %}
+
+<body class="{% if is_popup %}popup {% endif %}{% block bodyclass %}{% endblock %}">
+
+<!-- Container -->
+<div id="container">
+
+    {% if not is_popup %}
+    <!-- Header -->
+    <div id="header">
+        <div id="branding">
+        {% block branding %}{% endblock %}
+        </div>
+       
+        <div id="user-tools">
+            {% trans 'Welcome' %}
+            
+            {% block userlinks %}
+               
+                <a href="builty/accounts/password/change">Change password</a> /
+               
+                <a href="builty/accounts/logout">{% trans 'Log out' %}</a>
+            {% endblock %}
+        </div>
+        
+        {% block nav-global %}{% endblock %}
+    </div>
+    <!-- END Header -->
+    {% block breadcrumbs %}
+    <div class="breadcrumbs">
+    <a href="/builty">{% trans 'Home' %}</a>
+    {% if title %} &rsaquo; {{ title }}{% endif %}
+    </div>
+    {% endblock %}
+    {% endif %}
+
+    {% block messages %}
+        {% if messages %}
+        <ul class="messagelist">{% for message in messages %}
+          <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+        {% endfor %}</ul>
+        {% endif %}
+    {% endblock messages %}
+
+    <!-- Content -->
+    <div id="content" class="{% block coltype %}colM{% endblock %}">
+        {% block pretitle %}{% endblock %}
+        {% block content_title %}{% if title %}<h1>{{ title }}</h1>{% endif %}{% endblock %}
+        {% block content %}
+        {% block object-tools %}{% endblock %}
+        {{ content }}
+        {% endblock %}
+        {% block sidebar %}{% endblock %}
+        <br class="clear" />
+    </div>
+    <!-- END Content -->
+
+    {% block footer %}<div id="footer"></div>{% endblock %}
+</div>
+<!-- END Container -->
+
+</body>
+</html>

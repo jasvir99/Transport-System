@@ -1,0 +1,55 @@
+{% extends "base_site.html" %}
+{% load i18n %}
+<html lang="en">
+<head>
+    <title>Search{% if query %} Results{% endif %}</title>
+</head>
+{% block content %}
+<body>
+  <h2 class="changeBlue">Search a Client</h2>
+  <form action="." method="GET">
+    <label for="q">Name: </label>
+	{% if query == "" %}
+		 <input type="text" name="q" value="">
+	{% else %}
+    	<input type="text" name="q" value="{{ query|escape }}">
+	{% endif %}
+ 
+    <input type="submit" value="Search">
+  </form>
+
+  {% if query %}
+    
+<div class="module">
+        <table  border='1'>
+        <caption>
+            <aclass="section" title="Main">
+                {% blocktrans  %}Results :{% endblocktrans %}</a>
+		</caption>
+<tr>
+		<th>Sr.No </th>
+		<th>Name</th>
+		<th>Room No.</th>
+		<th>Options</th>
+	</tr>
+    {% if results %}
+      
+      {% for client in results %}
+	<tr>
+	<td>{{forloop.counter}}</td>
+        <td> {{ client.name }} </td>
+		<td> {{ client.room_id }} </td>
+		<td><a href="/rentsystem/main/profile/?id={{ client.id }}">Full Profile</a> | <a href="/rentsystem/main/history/?id={{ client.id }}">Payment History</a></td>
+	
+	</tr>
+      {% endfor %}
+      </ul>
+    {% else %}
+      <p>No clients found</p>
+    {% endif %}
+</table>
+  {% endif %}
+</div>
+</body>
+</html>
+{% endblock %}

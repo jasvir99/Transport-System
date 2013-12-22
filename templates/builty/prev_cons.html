@@ -1,0 +1,47 @@
+{% extends "base_site.html" %}
+{% load i18n %}
+<head>
+	<title>Search{% if query %} Results{% endif %}</title>
+</head>
+{% block content %}
+	<body>
+  		<h2 class="changeBlue">Search Consignmnet</h2>
+  		<form action="." method="GET">
+  		  	<label for="q">G.R No.: </label>
+  		  	<input type="text" name="q" value="{{ query|escape }}">
+  		  	<input type="submit" value="Search">
+  		</form>
+		<br><br>
+  		{% if query %}
+  		    {% if result %}
+				{% for val in result %}
+					<table width= "20%" class="striped">
+						<tr>
+							<th>Resuls</th>
+						</tr>
+						</tbody>
+							<tr class="even">
+								<td><b>Consigner </b>:&nbsp;{{ val.consigner }}</td>
+							</tr>
+							<tr>
+								<td><b>Consignee </b>:&nbsp;{{ val.consignee }}</td>
+							</tr>
+							<tr class="even">
+								<td><b>Source </b>:&nbsp; {{ val.source }}</td>
+							</tr>
+							<tr>
+								<td><b>Destination </b>&nbsp; {{ val.destination }}</td>
+							</tr>
+							<tr class="even">
+								<td><a href="/builty/main/genbuilty/?q={{ val.id }}">Consignment Note </a></td>
+							</tr>
+					</table>
+				{% endfor %}
+			{% else %}
+				<p>No Result Found</p>
+			{% endif %}
+		{% endif %}
+	</body>
+{% endblock %}
+
+				

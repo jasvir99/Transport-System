@@ -1,0 +1,121 @@
+'''
+    ** Including various required modules of django **
+'''
+from django.db import models
+from django.forms import ModelForm,TextInput,ModelChoiceField
+from django import forms
+import datetime
+from django.forms.fields import DateField, ChoiceField, MultipleChoiceField
+from tagging.fields import TagField
+from tagging.models import Tag
+from django.contrib.sessions.models import Session
+from django.contrib.auth.models import User
+from django.db.models.signals import post_save
+'''
+   ** defination of models start from here **
+'''
+
+class fixed_values(models.Model):
+    '''
+       **  Model for fixed values of application **
+    '''
+    title = models.CharField(max_length = 500)
+    owner = models.CharField(max_length = 100)
+    serviceTax = models.FloatField()
+
+class transfer_mode(models.Model):
+	'''
+		** Models for different transport modes **
+	''' 
+	mode = models.CharField(max_length = 50)
+	
+	def __unicode__(self):
+		return self.mode
+
+class dispatch_status(models.Model):
+	'''
+		** Model to be used in dispatch status of parcel **
+	'''
+
+	status = models.IntegerField(default = "0")
+	date = models.DateField(null = True, blank = True)
+
+
+class consignment_details(models.Model):
+    '''
+        ** Model for details of consignment **
+    '''
+    consigner = models.CharField(max_length = 100)
+    consigner_tin = models.CharField(max_length = 20)
+    consignee = models.CharField(max_length = 100)
+    consignee_tin = models.CharField(max_length = 20)
+    source = models.CharField(max_length = 30)
+    destination = models.CharField(max_length = 30)
+    number_of_pkgs = models.IntegerField(max_length = 10)
+    item_description = models.CharField(max_length = 200,blank=True)
+    private_mark = models.CharField(max_length = 100,blank=True, default = "NA")
+    invoice_no = models.CharField(max_length = 20, default = "NA")
+    date = models.DateField()
+    invoice_value = models.CharField(max_length = 30, default = "NA")
+    actual_weight_in_kg = models.FloatField()
+    charged_weight_in_kg = models.FloatField()
+    service_tax_paid_by = models.CharField(max_length = 40,blank=True)
+    mode_of_transfer = models.ForeignKey(transfer_mode)
+    status = models.ForeignKey(dispatch_status)
+
+
+class freight(models.Model):
+    '''
+        ** Model to define different freight modes. **
+    '''
+    mode = models.CharField(max_length = 100)
+    def __unicode__(self):
+                 return self.mode
+class payment_details(models.Model):
+    '''
+        ** Model for payment details. **
+    '''
+    billing_station = models.CharField(max_length = 100)
+    amount_to_pay = models.IntegerField(blank=True, default = 0)
+    amount_paid = models.IntegerField(blank=True, default = 0)
+    cheque_or_dd_no = models.CharField(max_length = 10,blank=True, default = "NA")
+
+
+class freight_details(models.Model):
+    '''
+    ** Model for all freight details **
+    '''
+    cons = models.ForeignKey(consignment_details)
+    pay = models.ForeignKey(payment_details)
+    basic_freight = models.FloatField(blank=True, default = "0")
+    barrier_charges = models.FloatField(blank=True, default = "0")
+    hamali_charges = models.FloatField(blank=True, default = "0")
+    stationary_charges = models.FloatField(blank=True, default = "0")
+    other_charges = models.FloatField(blank=True, default = "0")
+    total = models.FloatField()
+    service_tax = models.FloatField()
+    grand_total = models.FloatField()
+
+
+class consignmentForm(forms.ModelForm):
+    class Meta :
+        model = consignment_details
+        exclude = ['status']
+        widgets = {
+		'consigner': TextInput(attrs={'size':50}),
+		'consignee' : TextInput(attrs={'size':50}),
+		'source' : TextInput(attrs={'size':100}),
+		'destination' : TextInput(attrs={'size':100}),
+		'item_description' : TextInput(attrs={'size':100}),
+		'private_mark': TextInput(attrs={'size':50}),
+				}
+
+class paymentDetailsForm(forms.ModelForm):
+    class Meta:
+        model = payment_details
+        
+
+class freightDetailsForm(forms.ModelForm):
+    class Meta:
+		model = freight_details
+		exclude = ['cons','pay','total','service_tax','grand_total']

@@ -1,0 +1,22 @@
+{% extends "base_site.html" %}
+{% load i18n admin_static %}
+
+{% block extrastyle %}{{ block.super }}<link rel="stylesheet" type="text/css" href="{% static "admin/css/dashboard.css" %}" />{% endblock %}
+
+{% block coltype %}colMS{% endblock %}
+
+{% block bodyclass %}dashboard{% endblock %}
+
+{% block breadcrumbs %}{% endblock %}
+
+{% block content %}
+<h1>Detailed Profile</h1><br><br><br>
+{% if renter %}
+{% for renter in renter %}
+<p><b>Name: </b>{{ renter.name }}</p>
+<p><b>Address: </b>{{ renter.address }}</p>
+<p><b>Phone Number: </b>{{ renter.phone_no }}</p>
+<p><b>Start Date: </b>{{ renter.start_date }}</p>
+{% endfor %}
+{% endif %}
+{% endblock %}

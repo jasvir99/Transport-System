@@ -1,0 +1,41 @@
+{% extends "base_site.html" %}
+{% load i18n %}
+<html lang="en">
+<head>
+    <title>Search</title>
+</head>
+{% block content %}
+<form action="." method="GET">
+<h2 class="changeBlue">Search a Client</h2>          
+<label for="id_q">Search:</label>
+<input id="id_q" name="q" type="text"><br>
+<input type="submit" value="Submit"><br>
+You searched for "{{ query_string }}" and the results are listed below.
+<table border='1' class="fixed">
+<caption>
+            <aclass="section" title="search">
+                {% blocktrans  %}Results{% endblocktrans %}</a>
+		</caption>
+<tr>
+		<th>Sr.No </th>
+		<th>Name</th>
+                <th>Address</th>
+                <th>Phone No</th>
+	</tr>
+{% if found_entries %}
+  {% for client in found_entries %}
+	<tr>
+	<td>{{forloop.counter}}</td>
+        <td> {{ client.name }} </td>
+        <td> {{client.address}}</td>
+        <td>{{client.phone_no}}</td>	
+	</tr>
+      {% endfor %}
+      </ul>
+    {% else %}
+      <p>Nothing found</p>
+    {% endif %}
+</table>
+
+</html>
+{% endblock %}

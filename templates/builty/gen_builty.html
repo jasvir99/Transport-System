@@ -1,0 +1,118 @@
+{% extends "base_site_consNote.html" %}
+{% load i18n %}
+{% block title %}{{ title }} {% trans 'Consignment Note' %}{% endblock %}
+<html>
+
+{% block content %}
+<br><br>
+<h1 align="center">Consignment Note</h1>
+<br><br><br><br>
+	<table border="1" width="100%">
+	{% if cons_details %}
+	<tr>	
+		<th align="center"><b>Consigner</b></th>
+		<th><b>Consignee</b></th>
+		<th><b>G.R No. </b>:&nbsp;{{cons_details.id}}</th>
+	</tr>
+	<tr>
+		
+			
+				<td><b>Name M/S </b>:&nbsp;{{cons_details.consigner}}<br><br><b>Address </b>:&nbsp;{{cons_details.source}}<br><br><b>TIN </b>:&nbsp;{{cons_details.consigner_tin}}</td>
+				<td><b>Name M/S </b>:&nbsp;{{cons_details.consignee}}<br><br><b>Address </b>:&nbsp;{{cons_details.destination}}<br><br><b>TIN </b>:&nbsp;{{cons_details.consignee_tin}}</td>
+				<td><b>Date </b>:&nbsp;{{cons_details.date}}<br><br><b>From </b>:&nbsp;{{cons_details.source}}<br><br><b>To </b>:&nbsp;{{cons_details.destination}}</td>
+			
+		
+	</tr>
+	</table><br><br>
+	<table border="1" width="100%">
+	<tr>
+		<th><b>No. Of Pkgs</b></th>
+		<th><b>Description</b></th>
+		<th><b>Weight</b></th>	
+		<th><b>Payment Details</b></th>
+		<th><b>Other Details</b></th>
+	</tr>
+	<tr>
+		<td width="70" align="center"><br><br><br><br><br><br>{{cons_details.number_of_pkgs}}</td>
+		<td width="500" align="center">{{cons_details.item_description}}</td>
+			
+		<td>
+			<table border="1" width="100%">	
+			<tr>
+				<td align="center"><b>Actual</b></td>
+			</tr>
+			<tr>
+				<td align="center"><br><br>{{cons_details.actual_weight_in_kg}}&nbsp; KG<br><br><br></td>
+				
+			</tr> 
+			</table>
+		
+			<table border="1" width="100%">
+			<tr>
+				<td align="center"><b>Charged</b></td>
+			</tr>
+			<tr>
+				<td align="center"><br><br>{{cons_details.charged_weight_in_kg}}&nbsp; KG<br><br></td>
+			</tr>
+			</table>
+		</td>
+		{% endif %}
+		<td>
+			<table border="1" width="100%">
+			<tr>
+				<td width="100"><b>Basic Freight :</b>&nbsp;{{freight.basic_freight}}</td>
+			</tr>				
+			<tr>			
+				<td><b>Hamali Charges :</b>&nbsp;{{freight.hamali_charges}}</td>
+			</tr>
+			<tr>
+				<td><b>Barrier Charges :</b>&nbsp;{{freight.barrier_charges}}</td>
+			</tr>
+			<tr>
+				<td><b>Stationary :</b>&nbsp;{{freight.stationary_charges}}</td>
+			</tr>
+			<tr>
+				<td><b>Any Other :</b>&nbsp;{{freight.other_charges}}</td>
+			</tr>
+			<tr>
+				<td><b>Total :</b>&nbsp;{{freight.total}}</td>
+			<tr>
+				<td><b>Service Tax :</b>&nbsp;{{freight.service_tax}}</td>
+			</tr>
+			<tr>
+				<td><b>Grand Total :</b>&nbsp;{{freight.grand_total}}</td>
+			</tr>
+			</table>
+		</td>
+		<td>
+			<table border="1" width="100%">	
+			<tr>
+				<td align="center"><b>Mode Of Payment</b></td>
+			</tr>
+			<tr>
+				<td align="center"><br><br></td>
+				
+			</tr> 
+			</table>
+		
+			<table border="1" width="100%">
+			<tr>
+				<td align="center"><b>Service Tax Paid By</b></td>
+			</tr>
+			<tr>
+				<td align="center"><br>Consigner<br></td>
+			</tr>
+			</table>
+			<table border="1" width="100%">
+			<tr>
+				<td align="center"><b>Private Mark</b></td>
+			</tr>
+			<tr>
+				<td align="center"><br>{{cons_details.private_mark}}<br></td>
+			</tr>
+			</table>
+		</td>
+		</table>
+
+</html>
+{% endblock %}

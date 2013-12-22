@@ -1,0 +1,26 @@
+{% extends "base_site.html" %}
+{% load bootstrap_toolkit %}
+{% load i18n %}
+<html>
+
+{% block content %}
+<br>
+<h2 class="changeBlue">Check In</h2>
+    {% if form.errors %}
+        <p style="color: red;">
+            Please correct the error{{ form.errors|pluralize }} below.
+        </p>
+    {% endif %}
+<p><a href="/rentsystem/main/available">Check Rooms Available</a></p>
+    <form action="" method="post">
+	{% csrf_token %}
+        <table>
+            {{  form|as_bootstrap }}
+        </table>
+        <div class="form-actions">
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </div>
+    </form>
+
+</html>
+{% endblock %}

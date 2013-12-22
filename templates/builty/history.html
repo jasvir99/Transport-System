@@ -1,0 +1,42 @@
+{% extends "base_site.html" %}
+{% load i18n admin_static %}
+
+{% block extrastyle %}{{ block.super }}<link rel="stylesheet" type="text/css" href="{% static "admin/css/dashboard.css" %}" />{% endblock %}
+
+{% block coltype %}colMS{% endblock %}
+
+{% block bodyclass %}dashboard{% endblock %}
+
+{% block breadcrumbs %}{% endblock %}
+
+{% block content %}
+<h1>Payment History</h1><br><br><br>
+<div class="module">
+        <table  border='1'>
+        <caption>
+            <aclass="section" title="Main">
+                {% blocktrans  %}Results :{% endblocktrans %}</a>
+		</caption>
+<tr>
+		<th>Sr.No </th>
+		<th>Date Of Payment</th>
+		<th>Electricity</th>
+		<th>Balance</th>
+		<th>Ammount Paid</th>
+	</tr>
+    {% if payment %}
+{% for payment in payment %}
+	<tr>
+	<td>{{forloop.counter}}</td>
+        <td> {{ payment.date_of_payment }} </td>
+		<td> {{ payment.electricity }} </td>
+		<td>{{ payment.balance }} </td>
+		<td> {{ payment.ammount_paid }} </td>
+	
+	</tr>
+      {% endfor %}
+      </ul>
+    {% endif %}
+</table>
+
+{% endblock %}

@@ -1,0 +1,11 @@
+{% extends "base_site.html" %}
+{% load i18n %}
+<html>
+
+{% block content %}
+<h1>New Consignment</h1>
+<p>Consignment Added Successfully</p>
+<a href="/builty/addpayment/">Add Payment details </a>	
+
+</html>
+{% endblock %}
